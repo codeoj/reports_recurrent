@@ -15,6 +15,8 @@ defmodule ReportsRecurrent.Reports.StreamReport do
         from registration in Registration,
         order_by: registration.partner_id,
         where: fragment("?::date", registration.inserted_at) == ^date_today
+
+      %{"schedule" => "day"} -> from registration in Registration
     end
 
     {:ok, registration_list} =
